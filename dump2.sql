@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `mybatis_demo` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `mybatis_demo`;
 -- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1    Database: mybatis_demo
+-- Host: localhost    Database: mybatis_demo
 -- ------------------------------------------------------
 -- Server version	5.5.41-0ubuntu0.14.04.1
 
@@ -16,6 +14,31 @@ USE `mybatis_demo`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `BLOG`
+--
+
+DROP TABLE IF EXISTS `BLOG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `BLOG` (
+  `blog_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `blog_name` varchar(45) NOT NULL,
+  `created_on` datetime NOT NULL,
+  PRIMARY KEY (`blog_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `BLOG`
+--
+
+LOCK TABLES `BLOG` WRITE;
+/*!40000 ALTER TABLE `BLOG` DISABLE KEYS */;
+INSERT INTO `BLOG` VALUES (1,'test_blog_1422528644019','2015-01-29 12:50:44'),(2,'TestBlogName1422528685611','2015-01-29 12:51:03'),(3,'test_blog_1422528674593','2015-01-29 12:51:14');
+/*!40000 ALTER TABLE `BLOG` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `USER`
@@ -54,4 +77,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-29  2:33:47
+-- Dump completed on 2015-01-29 12:56:55
