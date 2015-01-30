@@ -44,11 +44,20 @@ public class User {
         this.lastName = lastName;
     }
 
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
+    }
+
     private Integer userId;
     private String emailId;
     private String password;
     private String firstName;
     private String lastName;
+    private Blog blog;
 
     @Override
     public String toString() {

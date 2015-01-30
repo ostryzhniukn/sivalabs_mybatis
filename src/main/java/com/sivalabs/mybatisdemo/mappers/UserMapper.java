@@ -9,6 +9,8 @@ public interface UserMapper
 
     public void insertUser(User user);
 
+    public void insertUserWithBlog(User user);
+
     public User getUserById(Integer userId);
 
     public List<User> getAllUsers();

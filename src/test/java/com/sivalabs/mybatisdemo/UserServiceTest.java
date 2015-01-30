@@ -1,12 +1,15 @@
 package com.sivalabs.mybatisdemo;
 
+import com.sivalabs.mybatisdemo.domain.Blog;
 import com.sivalabs.mybatisdemo.domain.User;
+import com.sivalabs.mybatisdemo.service.BlogService;
 import com.sivalabs.mybatisdemo.service.UserService;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserServiceTest
@@ -62,6 +65,37 @@ public class UserServiceTest
         Assert.assertEquals(user.getPassword(), createdUser.getPassword());
         Assert.assertEquals(user.getFirstName(), createdUser.getFirstName());
         Assert.assertEquals(user.getLastName(), createdUser.getLastName());
+
+    }
+
+    @Test
+    public void testInsertUserWithBlog(){
+        User user = new User();
+        user.setEmailId("test_email_"+System.currentTimeMillis()+"@gmail.com");
+        user.setPassword("secret");
+        user.setFirstName("TestFirstName");
+        user.setLastName("TestLastName");
+
+        Blog blog = new Blog();
+        blog.setBlogName("test_blog_"+System.currentTimeMillis());
+        blog.setCreatedOn(new Date());
+        new BlogService().insertBlog(blog);
+        Assert.assertTrue(blog.getBlogId() != 0);
+
+        user.setBlog(blog);
+
+        userService.insertUserWithBlog(user);
+        Assert.assertTrue(user.getUserId() != 0);
+        User createdUser = userService.getUserById(user.getUserId());
+        Assert.assertNotNull(createdUser);
+        Assert.assertEquals(user.getEmailId(), createdUser.getEmailId());
+        Assert.assertEquals(user.getPassword(), createdUser.getPassword());
+        Assert.assertEquals(user.getFirstName(), createdUser.getFirstName());
+        Assert.assertEquals(user.getLastName(), createdUser.getLastName());
+
+        Assert.assertNotNull(createdUser.getBlog());
+        Assert.assertEquals(blog.getBlogName(), createdUser.getBlog().getBlogName());
+
 
     }
 

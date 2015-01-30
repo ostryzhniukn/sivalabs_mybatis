@@ -1,12 +1,23 @@
 package com.sivalabs.mybatisdemo.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Blog {
 
     private Integer blogId;
     private String blogName;
     private Date createdOn;
+    private List<Post> posts = new ArrayList<Post>();
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 
     public Integer getBlogId() {
         return blogId;

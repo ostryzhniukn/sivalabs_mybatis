@@ -20,9 +20,19 @@ public class UserService
         }
     }
 
+    public void insertUserWithBlog(User user) {
+        SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+        try{
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            userMapper.insertUserWithBlog(user);
+            sqlSession.commit();
+        }finally{
+            sqlSession.close();
+        }
+    }
+
     public User getUserById(Integer userId) {
-        SqlSession sqlSession =
-                MyBatisUtil.getSqlSessionFactory().openSession();
+        SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
         try{
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
             return userMapper.getUserById(userId);

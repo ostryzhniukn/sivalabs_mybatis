@@ -4,32 +4,45 @@
 
 <mapper namespace="com.sivalabs.mybatisdemo.mappers.UserMapper">
 
-    <select id="getUserById" parameterType="int" resultType="com.sivalabs.mybatisdemo.domain.User">
-        SELECT
-        user_id as userId,
-        email_id as emailId ,
-        password,
-        first_name as firstName,
-        last_name as lastName
-        FROM USER
-        WHERE USER_ID = #{userId}
-    </select>
-    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
     <resultMap type="User" id="UserResult">
         <id property="userId" column="user_id"/>
         <result property="emailId" column="email_id"/>
         <result property="password" column="password"/>
         <result property="firstName" column="first_name"/>
         <result property="lastName" column="last_name"/>
+        <association property="blog" resultMap="BlogResult"/>
     </resultMap>
 
-    <select id="getAllUsers" resultMap="UserResult">
-        SELECT * FROM USER
+    <resultMap type="Blog" id="BlogResult">
+        <id property="blogId" column="blog_id"/>
+        <result property="blogName" column="BLOG_NAME"/>
+        <result property="createdOn" column="CREATED_ON"/>
+    </resultMap>
+
+    <select id="getUserById" parameterType="int" resultMap="UserResult">
+            SELECT
+            U.USER_ID, U.EMAIL_ID, U.PASSWORD, U.FIRST_NAME, U.LAST_NAME,
+            B.BLOG_ID, B.BLOG_NAME, B.CREATED_ON
+            FROM USER U LEFT OUTER JOIN BLOG B ON U.BLOG_ID=B.BLOG_ID
+            WHERE U.USER_ID = #{userId}
     </select>
 
-    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
+    <select id="getAllUsers" resultMap="UserResult">
+            SELECT
+            U.USER_ID, U.EMAIL_ID, U.PASSWORD, U.FIRST_NAME, U.LAST_NAME,
+            B.BLOG_ID, B.BLOG_NAME, B.CREATED_ON
+            FROM USER U LEFT OUTER JOIN BLOG B ON U.BLOG_ID=B.BLOG_ID
+    </select>
+
+
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId" >
         INSERT INTO USER(email_id, password, first_name, last_name)
         VALUES(#{emailId}, #{password}, #{firstName}, #{lastName})
+    </insert>
+
+    <insert id="insertUserWithBlog" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO USER(email_id, password, first_name, last_name, blog_id)
+        VALUES(#{emailId}, #{password}, #{firstName}, #{lastName}, #{blog.blogId})
     </insert>
 
     <update id="updateUser" parameterType="User">

@@ -5,7 +5,9 @@
 <configuration>
     <properties resource="jdbc.properties"/>
     <typeAliases>
-        <typeAlias type="com.sivalabs.mybatisdemo.domain.User" alias="User"></typeAlias>
+        <typeAlias type="com.sivalabs.mybatisdemo.domain.User" alias="User"/>
+        <typeAlias type="com.sivalabs.mybatisdemo.domain.Blog" alias="Blog"/>
+        <typeAlias type="com.sivalabs.mybatisdemo.domain.Post" alias="Post"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -20,7 +22,8 @@
     </environments>
     <mappers>
         <mapper resource="UserMapper.xml"/>
-        <mapper class="com.sivalabs.mybatisdemo.mappers.BlogMapper"/>
+        <mapper resource="BlogMapper.xml"/>
+        <!--<mapper class="com.sivalabs.mybatisdemo.mappers.BlogMapper"/>-->
     </mappers>
 </configuration>
 
