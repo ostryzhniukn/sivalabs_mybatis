@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:mybatis-config.xml")
+@ContextConfiguration(locations= "classpath:application-context.xml")
 public class SpringBlogServiceTest
 {
     @Autowired
